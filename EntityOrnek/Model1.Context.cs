@@ -12,6 +12,8 @@ namespace EntityOrnek
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class OkulEntities : DbContext
     {
@@ -28,5 +30,11 @@ namespace EntityOrnek
         public virtual DbSet<Dersler> Dersler { get; set; }
         public virtual DbSet<Notlar> Notlar { get; set; }
         public virtual DbSet<Ogrenci> Ogrenci { get; set; }
+        public virtual DbSet<Kulupler> Kulupler { get; set; }
+    
+        public virtual ObjectResult<NotListesi_Result> NotListesi()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NotListesi_Result>("NotListesi");
+        }
     }
 }

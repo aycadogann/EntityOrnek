@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="OkulModel.Ogrenci" Width="1.5" PointX="0.5" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="OkulModel.FK_Notlar_Dersler" ManuallyRouted="false" />
         <AssociationConnector Association="OkulModel.FK_Notlar_Ogrenci" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OkulModel.Kulupler" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -62,5 +62,102 @@ namespace EntityOrnek
             okulEntities.Ogrenci.Remove(silinecekId);
             okulEntities.SaveChanges();
         }
+
+        private void btn_Guncelle_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(txt_OgrenciId.Text);
+            var guncellenecekId = okulEntities.Ogrenci.Find(id);
+            guncellenecekId.OgrAd = txt_Ad.Text;
+            guncellenecekId.OgrSoyad = txt_Soyad.Text;
+            guncellenecekId.Fotograf = txt_Fotograf.Text;
+            okulEntities.SaveChanges();
+        }
+
+        private void btn_Prosedur_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = okulEntities.NotListesi();
+        }
+
+        private void btn_Bul_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = okulEntities.Ogrenci.Where(o => o.OgrAd == txt_Ad.Text | o.OgrSoyad==txt_Soyad.Text).ToList();
+        }
+
+        private void txt_Ad_TextChanged(object sender, EventArgs e)
+        {
+            string aranan = txt_Ad.Text;
+            var degerler = from item in okulEntities.Ogrenci
+                           where item.OgrAd.Contains(aranan)
+                           select item;
+            dataGridView1.DataSource = degerler.ToList();
+        }
+
+        private void btn_LinqEntity_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked==true)
+            {
+                List<Ogrenci> ogrenciListe = okulEntities.Ogrenci.OrderBy(o => o.OgrAd).ToList();
+                dataGridView1.DataSource = ogrenciListe;
+            }
+            if (radioButton2.Checked==true)
+            {
+                List<Ogrenci> ogrenciListe2 = okulEntities.Ogrenci.OrderByDescending(o => o.OgrAd).ToList();
+                dataGridView1.DataSource = ogrenciListe2;
+            }
+            if (radioButton3.Checked==true)
+            {
+                List<Ogrenci> ogrenciListe3 = okulEntities.Ogrenci.OrderBy(o => o.OgrAd).Take(3).ToList();
+                dataGridView1.DataSource = ogrenciListe3;
+            }
+            if (radioButton4.Checked==true)
+            {
+                List<Ogrenci> ogrenciListe4 = okulEntities.Ogrenci.Where(o => o.Id == 5).ToList();
+                dataGridView1.DataSource = ogrenciListe4;
+            }
+            if (radioButton5.Checked==true)
+            {
+                List<Ogrenci> ogrenciListe5 = okulEntities.Ogrenci.Where(o => o.OgrAd.StartsWith("a")).ToList();
+                dataGridView1.DataSource = ogrenciListe5;
+            }
+            if (radioButton6.Checked == true)
+            {
+                List<Ogrenci> ogrenciListe6 = okulEntities.Ogrenci.Where(o => o.OgrAd.EndsWith("a")).ToList();
+                dataGridView1.DataSource = ogrenciListe6;
+            }
+            if (radioButton7.Checked==true)
+            {
+                bool deger = okulEntities.Ogrenci.Any();
+                MessageBox.Show(deger.ToString(), "Bilgi", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            if (radioButton8.Checked==true)
+            {
+                int toplam = okulEntities.Ogrenci.Count();
+                MessageBox.Show(toplam.ToString(), "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (radioButton9.Checked==true)
+            {
+                var toplam = okulEntities.Notlar.Sum(s => s.Sinav1);
+                MessageBox.Show("Toplam Sınav 1 Puanı: " + toplam.ToString());
+            }
+            if (radioButton10.Checked==true)
+            {
+                var ortalama = okulEntities.Notlar.Average(n => n.Sinav1);
+                MessageBox.Show("1. Sınav Ortalaması: " + ortalama.ToString());
+            }
+            if (radioButton11.Checked==true)
+            {
+                var enYuksek = okulEntities.Notlar.Max(n => n.Sinav1);
+                var ogrenci = from item in okulEntities.NotListesi()
+                              where item.Sinav1 == enYuksek
+                              select new { item.Ad_Soyad, item.Sinav1 };
+                dataGridView1.DataSource = ogrenci.ToList();
+                //MessageBox.Show("1. sınavın en yüksek notu: " + enYuksek);
+            }
+            if (radioButton12.Checked == true)
+            {
+                var enDusuk = okulEntities.Notlar.Min(n => n.Sinav1);
+                MessageBox.Show("1. sınavın en yüksek notu: " + enDusuk);
+            }
+        }
     }
 }
