@@ -50,7 +50,7 @@ namespace EntityOrnek
             this.label7 = new System.Windows.Forms.Label();
             this.txt_DersAd = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btn_NotGuncelle = new System.Windows.Forms.Button();
+            this.btn_Join = new System.Windows.Forms.Button();
             this.btn_Hesapla = new System.Windows.Forms.Button();
             this.txt_Durum = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -274,7 +274,7 @@ namespace EntityOrnek
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btn_NotGuncelle);
+            this.groupBox3.Controls.Add(this.btn_Join);
             this.groupBox3.Controls.Add(this.btn_Hesapla);
             this.groupBox3.Controls.Add(this.txt_Durum);
             this.groupBox3.Controls.Add(this.label11);
@@ -293,14 +293,15 @@ namespace EntityOrnek
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Notlar";
             // 
-            // btn_NotGuncelle
+            // btn_Join
             // 
-            this.btn_NotGuncelle.Location = new System.Drawing.Point(91, 208);
-            this.btn_NotGuncelle.Name = "btn_NotGuncelle";
-            this.btn_NotGuncelle.Size = new System.Drawing.Size(156, 29);
-            this.btn_NotGuncelle.TabIndex = 20;
-            this.btn_NotGuncelle.Text = "Sınav Notu Güncelle";
-            this.btn_NotGuncelle.UseVisualStyleBackColor = true;
+            this.btn_Join.Location = new System.Drawing.Point(91, 208);
+            this.btn_Join.Name = "btn_Join";
+            this.btn_Join.Size = new System.Drawing.Size(156, 29);
+            this.btn_Join.TabIndex = 20;
+            this.btn_Join.Text = "Join İle Getir";
+            this.btn_Join.UseVisualStyleBackColor = true;
+            this.btn_Join.Click += new System.EventHandler(this.btn_Join_Click);
             // 
             // btn_Hesapla
             // 
@@ -630,7 +631,7 @@ namespace EntityOrnek
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txt_DersAd;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btn_NotGuncelle;
+        private System.Windows.Forms.Button btn_Join;
         private System.Windows.Forms.Button btn_Hesapla;
         private System.Windows.Forms.TextBox txt_Durum;
         private System.Windows.Forms.Label label11;
